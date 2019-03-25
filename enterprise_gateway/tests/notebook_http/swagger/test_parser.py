@@ -3,7 +3,6 @@
 """Tests for notebook cell parsing."""
 
 import unittest
-import sys
 from kernel_gateway.notebook_http.swagger.parser import SwaggerCellParser
 
 
@@ -158,10 +157,10 @@ class TestSwaggerAPICellParser(unittest.TestCase):
         """
         source_cells = [
             {"source":'```\n{"swagger":"2.0", "paths": {"/foo": {"put": {"operationId":"putbar","parameters": [{"name": "bar"}]},"post":{"operationId":"postbar"},"get": {"operationId":"get","parameters": [{"name": "bar"}]}}}}\n```\n'},# noqa
-            {"source":'# operationId: get'},
-            {"source":'# operationId: postbar '},
-            {"source":'# operationId: putbar'},
-            {"source":'# operationId: extraOperation'},
+            {"source": '# operationId: get'},
+            {"source": '# operationId: postbar '},
+            {"source": '# operationId: putbar'},
+            {"source": '# operationId: extraOperation'},
         ]
         with self.assertLogs(level='WARNING') as warnings:
             SwaggerCellParser(comment_prefix='#', notebook_cells=source_cells)
@@ -173,10 +172,10 @@ class TestSwaggerAPICellParser(unittest.TestCase):
         swagger cell
         """
         source_cells = [
-            {"source":'# operationId: get'},
-            {"source":'# operationId: postbar '},
-            {"source":'# operationId: putbar'},
-            {"source":'# operationId: extraOperation'},
+            {"source": '# operationId: get'},
+            {"source": '# operationId: postbar '},
+            {"source": '# operationId: putbar'},
+            {"source": '# operationId: extraOperation'},
             {"source":'```\n{"swagger":"2.0", "paths": {"/foo": {"put": {"operationId":"putbar","parameters": [{"name": "bar"}]},"post":{"operationId":"postbar"},"get": {"operationId":"get","parameters": [{"name": "bar"}]}}}}\n```\n'},# noqa
         ]
         with self.assertLogs(level='WARNING') as warnings:
